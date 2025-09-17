@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥街头简历🔥</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Orbitron:wght@400;700;900&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 背景粒子效果 -->
+    <div class="particles"></div>
+    
+    <!-- 霓虹灯标题 -->
+    <header class="neon-header">
+        <h1 class="glitch-text" data-text="MC 街头艺术家">MC 街头艺术家</h1>
+        <div class="neon-subtitle">⚡ 说唱界最会写代码的 🔥 代码界最会rap的 ⚡</div>
+    </header>
+
+    <!-- 立体旋转卡片 -->
+    <div class="card-container">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>🎤 关于我</h2>
+                    <div class="graffiti-text">YO! YO!</div>
+                </div>
+                <div class="flip-card-back">
+                    <p>我是街头长大的代码诗人，用键盘敲出808鼓点，用代码画出涂鸦墙。白天是程序员，晚上是说唱歌手，24/7都在创造！</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>💻 技能栈</h2>
+                    <div class="graffiti-text">SKILLZ</div>
+                </div>
+                <div class="flip-card-back">
+                    <ul class="skill-list">
+                        <li>🎵 制作Trap Beats</li>
+                        <li>💻 全栈开发</li>
+                        <li>🎨 街头涂鸦</li>
+                        <li>🔥 Freestyle Battle</li>
+                        <li>⚡ 代码优化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>🏆 战绩</h2>
+                    <div class="graffiti-text">WINZ</div>
+                </div>
+                <div class="flip-card-back">
+                    <ul class="achievement-list">
+                        <li>🏅 地下Battle 8连胜</li>
+                        <li>💎 GitHub Star 1000+</li>
+                        <li>🎤 发布3张Mixtape</li>
+                        <li>🔥 代码review零bug</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 互动式时间线 -->
+    <section class="timeline">
+        <h2 class="timeline-title">🚀 我的旅程</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-icon">🎤</div>
+                <div class="timeline-content">
+                    <h3>2018 - 开始说唱</h3>
+                    <p>在街头第一次freestyle，被警察叔叔赶走</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">💻</div>
+                <div class="timeline-content">
+                    <h3>2019 - 学习编程</h3>
+                    <p>发现写代码和写歌词一样需要押韵</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">🔥</div>
+                <div class="timeline-content">
+                    <h3>2021 - 第一份工作</h3>
+                    <p>把面试当成cypher，成功拿到offer</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">⚡</div>
+                <div class="timeline-content">
+                    <h3>2024 - 现在</h3>
+                    <p>白天写代码，晚上写歌词，周末battle</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 互动按钮区域 -->
+    <section class="interaction-zone">
+        <h2>🎵 来点互动？</h2>
+        <button class="beat-button" onclick="playBeat()">🔊 播放我的Beat</button>
+        <button class="rap-button" onclick="showLyrics()">🎤 随机歌词</button>
+        <button class="dance-button" onclick="startDance()">💃 开始尬舞</button>
+    </section>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-controls">
+            <span>🎵 Now Playing: Trap Soul Type Beat</span>
+            <button onclick="stopMusic()">❌</button>
+        </div>
+    </div>
+
+    <!-- 歌词弹窗 -->
+    <div class="lyrics-popup" id="lyricsPopup">
+        <div class="lyrics-content">
+            <h3>🎤 随机歌词</h3>
+            <p id="randomLyric">正在加载...</p>
+            <button onclick="closeLyrics()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 3D旋转展示 -->
+    <section class="showcase">
+        <h2>🎨 我的作品</h2>
+        <div class="showcase-container">
+            <div class="showcase-item" data-project="beats">
+                <div class="showcase-front">🎵 Beats</div>
+                <div class="showcase-back">制作了50+ Trap Beats</div>
+            </div>
+            <div class="showcase-item" data-project="code">
+                <div class="showcase-front">💻 Code</div>
+                <div class="showcase-back">开发了10+ 开源项目</div>
+            </div>
+            <div class="showcase-item" data-project="art">
+                <div class="showcase-front">🎨 Graffiti</div>
+                <div class="showcase-back">街头涂鸦作品遍布全城</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <footer class="contact-section">
+        <h2>🤝 联系我</h2>
+        <div class="contact-links">
+            <a href="#" class="contact-link">📧 Email</a>
+            <a href="#" class="contact-link">🐙 GitHub</a>
+            <a href="#" class="contact-link">🎵 SoundCloud</a>
+            <a href="#" class="contact-link">📱 WeChat</a>
+        </div>
+        <p class="footer-text">Made with ❤️ and ☕ by 街头程序员</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
