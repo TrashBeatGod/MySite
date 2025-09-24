@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-// 音乐播放器已移除 // import MusicPlayer from './components/MusicPlayerFixed'
 
 function App() {
   const [aboutVisible, setAboutVisible] = useState(false)
@@ -170,8 +169,7 @@ function App() {
         </div>
       </div>
 
-      {/* 自定义音乐播放器已移除 */}
-      {/* <MusicPlayer /> */}
+
     </div>
   )
 }
