@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>音频路径测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        button { margin: 5px; padding: 10px 15px; cursor: pointer; }
+        #results { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🎯 GitHub Pages 音频路径诊断</h1>
+    
+    <div class="test-section">
+        <h3>测试不同的音频路径</h3>
+        <button onclick="testPath('/MySite/music/backgroundmusic.mp3')">测试路径1: /MySite/music/backgroundmusic.mp3</button>
+        <button onclick="testPath('/music/backgroundmusic.mp3')">测试路径2: /music/backgroundmusic.mp3</button>
+        <button onclick="testPath('./music/backgroundmusic.mp3')">测试路径3: ./music/backgroundmusic.mp3</button>
+        <button onclick="testPath('music/backgroundmusic.mp3')">测试路径4: music/backgroundmusic.mp3</button>
+        <button onclick="testPath('../music/backgroundmusic.mp3')">测试路径5: ../music/backgroundmusic.mp3</button>
+    </div>
+
+    <div class="test-section">
+        <h3>环境信息</h3>
+        <div id="envInfo"></div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        // 显示环境信息
+        function showEnvInfo() {
+            const envDiv = document.getElementById('envInfo');
+            const info = {
+                '当前URL': window.location.href,
+                '主机名': window.location.hostname,
+                '路径': window.location.pathname,
+                '协议': window.location.protocol,
+                '假设的GitHub Pages路径': '/MySite/',
+                'process.env.PUBLIC_URL': typeof process !== 'undefined' && process.env ? process.env.PUBLIC_URL : '未定义'
+            };
+
+            let html = '';
+            for (const [key, value] of Object.entries(info)) {
+                html += `<p><strong>${key}:</strong> ${value}</p>`;
+            }
+            envDiv.innerHTML = html;
+        }
+
+        function testPath(path) {
+            const resultDiv = document.getElementById('results');
+            const fullUrl = window.location.origin + path;
+            
+            const testDiv = document.createElement('div');
+            testDiv.className = 'test-section';
+            testDiv.innerHTML = `
+                <h4>测试路径: ${path}</h4>
+                <p><strong>完整URL:</strong> <a href="${fullUrl}" target="_blank">${fullUrl}</a></p>
+                <div id="result-${path.replace(/[^a-zA-Z0-9]/g, '-')}"></div>
+                <audio id="audio-${path.replace(/[^a-zA-Z0-9]/g, '-')}" controls style="width: 100%; margin-top: 10px;"></audio>
+            `;
+            
+            resultDiv.appendChild(testDiv);
+            
+            // 测试音频加载
+            const audio = document.getElementById(`audio-${path.replace(/[^a-zA-Z0-9]/g, '-')}`);
+            const result = document.getElementById(`result-${path.replace(/[^a-zA-Z0-9]/g, '-')}`);
+            
+            audio.addEventListener('loadstart', () => {
+                result.innerHTML = '<p style="color: blue;">⏳ 开始加载...</p>';
+            });
+            
+            audio.addEventListener('loadedmetadata', () => {
+                result.innerHTML += `<p style="color: green;">✅ 元数据加载成功！时长: ${Math.round(audio.duration)}秒</p>`;
+            });
+            
+            audio.addEventListener('canplay', () => {
+                result.innerHTML += '<p style="color: green;">✅ 可以开始播放</p>';
+            });
+            
+            audio.addEventListener('error', (e) => {
+                const error = audio.error;
+                result.innerHTML += `<p style="color: red;">❌ 加载失败: ${getErrorMessage(error.code)} (代码: ${error.code})</p>`;
+                
+                // 尝试HTTP请求获取更多信息
+                fetch(path, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            result.innerHTML += `<p style="color: green;">✅ HTTP请求成功: ${response.status}</p>`;
+                            result.innerHTML += `<p>文件大小: ${response.headers.get('content-length')} bytes</p>`;
+                            result.innerHTML += `<p>内容类型: ${response.headers.get('content-type')}</p>`;
+                        } else {
+                            result.innerHTML += `<p style="color: red;">❌ HTTP错误: ${response.status} ${response.statusText}</p>`;
+                        }
+                    })
+                    .catch(err => {
+                        result.innerHTML += `<p style="color: red;">❌ 网络错误: ${err.message}</p>`;
+                    });
+            });
+            
+            audio.src = path;
+            audio.load();
+        }
+
+        function getErrorMessage(code) {
+            switch(code) {
+                case 1: return 'MEDIA_ERR_ABORTED - 用户中止';
+                case 2: return 'MEDIA_ERR_NETWORK - 网络错误';
+                case 3: return 'MEDIA_ERR_DECODE - 解码错误';
+                case 4: return 'MEDIA_ERR_SRC_NOT_SUPPORTED - 格式不支持';
+                default: return '未知错误';
+            }
+        }
+
+        // 页面加载时显示环境信息
+        window.addEventListener('load', () => {
+            showEnvInfo();
+            
+            // 自动测试推荐路径
+            setTimeout(() => {
+                if (window.location.hostname.includes('github.io')) {
+                    testPath('/MySite/music/backgroundmusic.mp3');
+                } else {
+                    testPath('/music/backgroundmusic.mp3');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
