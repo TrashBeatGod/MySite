@@ -666,7 +666,9 @@
     height: 2.6em; /* 两行文字高度 */
     display: -webkit-box; /* 弹性盒子布局 */
     -webkit-line-clamp: 2; /* 限制为两行 */
+    line-clamp: 2; /* 标准属性以实现兼容性 */
     -webkit-box-orient: vertical; /* 垂直排列 */
+    box-orient: vertical; /* 标准属性 */
     text-align: center; /* 文字居中 */
     white-space: normal; /* 允许换行 */
   }
@@ -853,7 +855,9 @@
     height: 2.4em; /* 两行文字高度 */
     display: -webkit-box; /* 弹性盒子布局 */
     -webkit-line-clamp: 2; /* 限制为两行 */
+    line-clamp: 2; /* 标准属性以实现兼容性 */
     -webkit-box-orient: vertical; /* 垂直排列 */
+    box-orient: vertical; /* 标准属性 */
     text-align: center; /* 文字居中 */
     white-space: normal; /* 允许换行 */
   }
