@@ -4,6 +4,34 @@
   box-sizing: border-box;
 }
 
+/* 哔哩哔哩链接样式 */
+.bilibili-link {
+  color: #00a1d6;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(0, 161, 214, 0.1);
+  border: 2px solid rgba(0, 161, 214, 0.3);
+}
+
+.bilibili-link:hover {
+  color: #ffffff;
+  background: #00a1d6;
+  border-color: #00a1d6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 161, 214, 0.3);
+}
+
+.bilibili-link:active {
+  transform: translateY(0);
+}
+
 /* 主内容区 */
 .main-content {
   flex: 1;
@@ -498,7 +526,7 @@
 /* 响应式设计 */
 
 @media (max-width: 768px) {
-  .bottom-banner {
+  .top-banner {
     position: fixed;
     bottom: 20px; /* 距离底部 20px（可自定义） */
     left: 50%;

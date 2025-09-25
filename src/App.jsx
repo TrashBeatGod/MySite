@@ -174,7 +174,16 @@ function App() {
             <div className="detail-panel">
               <h3>📖 关于MOSHPIT</h3>
               <div className="detail-content">
-                <p>小楫轻舟 梦入芙蓉浦</p>
+                <p>
+                  <a 
+                    href="https://space.bilibili.com/335136709" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bilibili-link"
+                  >
+                    🎬 哔哩哔哩主页
+                  </a>
+                </p>
               </div>
             </div>
           )}
